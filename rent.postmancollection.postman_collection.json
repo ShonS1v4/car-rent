@@ -1,0 +1,434 @@
+{
+	"info": {
+		"_postman_id": "fa6a1916-8de3-44fe-8305-6e18123f3eed",
+		"name": "rent.postmancollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cars",
+			"item": [
+				{
+					"name": "add car to database",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mark\": \"prius\",\n    \"model\": \"4WD SUKA\",\n    \"gov_number\": \"A111AA23RUS\",\n    \"vin\": \"sdkojsjsdkjjngksd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all cars from bd",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "take for rent",
+			"item": [
+				{
+					"name": "take a car for rent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4,\n    \"taken_from\": \"Wed Dec 1 2021 10:03:31 GMT+0300 (Москва, стандартное время)\",\n    \"taken_for\": \"Fri Dec 31 2021 10:03:31 GMT+0300 (Москва, стандартное время)\",\n    \"km\": 350\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/take",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"take"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "give back a car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/return",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"return"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "overview",
+			"item": [
+				{
+					"name": "All cars overviev",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/get-all-overview",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"get-all-overview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ovewviev by car id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rental tariffs",
+			"item": [
+				{
+					"name": "get rates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{tariff}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set rate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{tariff}}\",\n    \"km_per_day\": 500,\n    \"price\": 390\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/tariffs",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"tariffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get rate by km",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{tariff}}\",\n    \"km\": 501\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils/by",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils",
+								"by"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete rate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{tariff}}\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rental discounts",
+			"item": [
+				{
+					"name": "get all discounts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\" : \"{{discount}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get discount by days",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{discount}}\",\n    \"days\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils/by",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils",
+								"by"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set discount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": {{discount}},\n    \"days_from\": 3,\n    \"days_to\": 5,\n    \"discount\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete discount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"{{discount}}\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{transport}}://{{host}}/cars/utils/",
+							"protocol": "{{transport}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"cars",
+								"utils",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "transport",
+			"value": "http"
+		},
+		{
+			"key": "host",
+			"value": "localhost:3002"
+		},
+		{
+			"key": "tariff",
+			"value": "0"
+		},
+		{
+			"key": "discount",
+			"value": "1"
+		}
+	]
+}
