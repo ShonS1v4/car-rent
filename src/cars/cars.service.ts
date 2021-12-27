@@ -47,15 +47,11 @@ export class CarsService {
 
   public async rent(data: any) {
     const car = await this.Cars.findOne({ id: data.id });
-    if (await car) {
-      if (car.is_available) {
-        return await this.rent_success(data);
-      } else {
-        return 'Машина на данный момент занята';
-      }
-    } else {
-      return 'Машина не найдена';
-    }
+    if (car.is_available)
+        return  await this.rent_success(data)
+    if (!car.is_available)
+      return 'Машина на данный момент занята';
+    return 'Машина не найдена';
   }
 
   //rent
@@ -96,8 +92,8 @@ export class CarsService {
         relations: ['load_total'],
       });
       car.load_total.total_km += km;
-      car.load_total.last_rent_total = total_days;
       car.load_total.total_days += total_days;
+      car.load_total.last_rent_total = total_days;
       car.load_total.last_km = km;
       car.taken_from = taken_from;
       car.taken_for = taken_for;
@@ -115,17 +111,14 @@ export class CarsService {
   }
 
   //функция которая оббновит отчет об машине
-  //TODO Обновлять отчеты при аренде машины
   public async getOverviewByyCar(id) {
     console.log(id);
     const loads = await getRepository(Load).find({
       relations: ['car'],
     });
-    for (let i = 0; i < loads.length; i++) {
-      if (loads[i].car.id == id) {
-        console.log(loads[i]);
-        return loads[i];
-      }
+    for (let item of loads) {
+      item.car.id == id
+      ?? item
     }
   }
 
@@ -193,10 +186,10 @@ export class CarsService {
 
   //this func find tariff by km or discount by days
   public async getUtilByRow(data) {
-    if (data.type == types.TARIFF) {
+    if (data.type === types.TARIFF) {
       const { km } = data;
       let tariffs = await this.getUtils({ type: 0 });
-      tariffs.sort(function (a) {
+      tariffs.sort((a) => {
         return a.km_per_day;
       });
       tariffs = tariffs.reverse();
